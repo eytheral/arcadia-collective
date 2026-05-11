@@ -151,7 +151,7 @@ body {
 
 /* HERO */
 .hero {
-  min-height: 100vh;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -162,33 +162,48 @@ body {
   overflow: hidden;
 }
 
-.hero-bg {
+/* Card mosaic background */
+.hero-cards {
   position: absolute;
   inset: 0;
   z-index: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  grid-auto-rows: 180px;
+  gap: 3px;
+  padding: 3px;
+  opacity: 0.4;
+  overflow: hidden;
+  max-height: 100vh;
 }
 
-.hero-bg::before {
-  content: '';
+.hero-cards img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 4px;
+  opacity: 0;
+  transform: scale(0) rotate(calc(var(--r, 0) * 1deg));
+  transition: opacity 0.35s ease-out, transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hero-cards img.visible {
+  opacity: 1;
+  transform: scale(1) rotate(0deg);
+}
+
+/* Dark overlay for text readability */
+.hero-overlay {
   position: absolute;
-  top: -40%;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 800px;
-  height: 800px;
-  background: radial-gradient(circle, var(--accent-dim) 0%, transparent 70%);
-  border-radius: 50%;
-  animation: heroPulse 6s ease-in-out infinite;
-}
-
-@keyframes heroPulse {
-  0%, 100% { opacity: 0.4; transform: translateX(-50%) scale(1); }
-  50% { opacity: 0.7; transform: translateX(-50%) scale(1.1); }
+  inset: 0;
+  z-index: 1;
+  background: radial-gradient(ellipse 60% 50% at center, rgba(10,10,10,0.82) 0%, rgba(10,10,10,0.65) 100%);
+  pointer-events: none;
 }
 
 .hero-content {
   position: relative;
-  z-index: 1;
+  z-index: 2;
   max-width: 900px;
 }
 
@@ -196,7 +211,7 @@ body {
   margin-bottom: var(--space-lg);
   opacity: 0;
   transform: scale(0.9);
-  animation: heroLogoIn 1s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
+  animation: heroLogoIn 1s cubic-bezier(0.16, 1, 0.3, 1) 2.5s forwards;
 }
 
 .hero-logo svg {
@@ -218,7 +233,7 @@ body {
   margin-bottom: var(--space-md);
   opacity: 0;
   transform: translateY(20px);
-  animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.5s forwards;
+  animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 2.7s forwards;
 }
 
 .hero h1 {
@@ -231,7 +246,7 @@ body {
   margin-bottom: var(--space-md);
   opacity: 0;
   transform: translateY(30px);
-  animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.7s forwards;
+  animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 2.9s forwards;
 }
 
 .hero h1 .accent {
@@ -247,7 +262,7 @@ body {
   text-wrap: pretty;
   opacity: 0;
   transform: translateY(20px);
-  animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.9s forwards;
+  animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 3.1s forwards;
 }
 
 .hero-actions {
@@ -257,7 +272,7 @@ body {
   flex-wrap: wrap;
   opacity: 0;
   transform: translateY(20px);
-  animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 1.1s forwards;
+  animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 3.3s forwards;
 }
 
 @keyframes fadeUp {
@@ -309,6 +324,7 @@ body {
   bottom: var(--space-md);
   left: 50%;
   transform: translateX(-50%);
+  z-index: 2;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -318,7 +334,7 @@ body {
   letter-spacing: 0.15em;
   text-transform: uppercase;
   opacity: 0;
-  animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 1.5s forwards;
+  animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 3.6s forwards;
 }
 
 .hero-scroll-line {
@@ -930,7 +946,8 @@ section {
 
 <!-- HERO -->
 <section class="hero" id="hero">
-  <div class="hero-bg"></div>
+  <div class="hero-cards" id="heroCards"></div>
+  <div class="hero-overlay"></div>
   <div class="hero-content">
     <div class="hero-logo">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="591 469 318 318" width="120" height="120">
@@ -1142,6 +1159,30 @@ section {
 </footer>
 
 <script>
+// Card cascade hero
+(function() {
+  const grid = document.getElementById('heroCards');
+  const totalCards = 60;
+  const stagger = 35;
+  const cards = [];
+
+  for (let i = 0; i < totalCards; i++) {
+    const img = document.createElement('img');
+    const cardNum = ((i % 189) + 1).toString().padStart(3, '0');
+    img.src = 'cards/card-' + cardNum + '.png';
+    img.alt = '';
+    img.loading = 'eager';
+    img.style.setProperty('--r', (Math.random() * 20 - 10).toString());
+    cards.push(img);
+    grid.appendChild(img);
+  }
+
+  const shuffled = cards.sort(() => Math.random() - 0.5);
+  shuffled.forEach((img, i) => {
+    setTimeout(() => img.classList.add('visible'), i * stagger);
+  });
+})();
+
 // Scroll reveal
 const reveals = document.querySelectorAll('.reveal');
 const observer = new IntersectionObserver((entries) => {
