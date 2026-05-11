@@ -417,31 +417,44 @@ section {
   margin-top: var(--space-lg);
 }
 
-.about-visual {
-  aspect-ratio: 1;
-  background: var(--surface);
-  border-radius: 24px;
+.founders {
   display: flex;
-  align-items: center;
+  gap: var(--space-md);
   justify-content: center;
-  position: relative;
-  overflow: hidden;
+}
+
+.founder {
+  text-align: center;
+  flex: 1;
+}
+
+.founder img {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 20px;
   border: 1px solid var(--border);
+  filter: grayscale(0.3);
+  transition: filter 0.4s, border-color 0.3s;
 }
 
-.about-visual::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(circle at 30% 40%, var(--accent-dim), transparent 60%);
+.founder:hover img {
+  filter: grayscale(0);
+  border-color: rgba(213, 238, 14, 0.3);
 }
 
-.about-visual svg {
-  width: 50%;
-  height: auto;
-  position: relative;
-  z-index: 1;
-  filter: drop-shadow(0 0 40px var(--accent-dim));
+.founder-name {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 600;
+  margin-top: 16px;
+}
+
+.founder-role {
+  font-size: 13px;
+  color: var(--text-dim);
+  letter-spacing: 0.05em;
+  margin-top: 4px;
 }
 
 .about-text p {
@@ -868,8 +881,8 @@ section {
     gap: var(--space-lg);
   }
 
-  .about-visual {
-    max-height: 300px;
+  .founders {
+    flex-direction: row;
   }
 
   .product-grid {
@@ -978,10 +991,17 @@ section {
         <p class="reveal reveal-delay-2">We started Arcadia Collective because we were tired of settling. Cheap sleeves that split. Binders that bent. Top loaders that scratched. As collectors ourselves, we knew the community deserved better.</p>
         <p class="reveal reveal-delay-3">Every product in our lineup is tested, refined, and approved by real collectors before it reaches your hands. No compromises. No shortcuts. Just pure, uncompromising protection for the cards you love.</p>
       </div>
-      <div class="about-visual reveal reveal-delay-2">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="591 469 318 318">
-          <path fill="#d5ee0e" d="M 724.2 469.2 L 775.8 469.2 L 766 589.5 L 844.2 497.5 L 880.6 534 L 788.7 612.1 L 908.9 602.4 L 908.9 653.9 L 788.7 644.2 L 880.6 722.3 L 844.2 758.8 L 766 666.8 L 775.8 787.1 L 724.2 787.1 L 734 666.8 L 655.8 758.8 L 619.4 722.3 L 711.3 644.2 L 591.1 653.9 L 591.1 602.4 L 711.3 612.1 L 619.4 534 L 655.8 497.5 L 734 589.5 Z"/>
-        </svg>
+      <div class="founders reveal reveal-delay-2">
+        <div class="founder">
+          <img src="Rick.jpeg" alt="Rick — Co-Founder" loading="lazy">
+          <div class="founder-name">Rick</div>
+          <div class="founder-role">Co-Founder</div>
+        </div>
+        <div class="founder">
+          <img src="tim.jpeg" alt="Tim — Co-Founder" loading="lazy">
+          <div class="founder-name">Tim</div>
+          <div class="founder-role">Co-Founder</div>
+        </div>
       </div>
     </div>
     <div class="about-stats reveal reveal-delay-3">
