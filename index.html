@@ -1,0 +1,1223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arcadia Collective — Premium TCG Accessories</title>
+<meta name="description" content="Premium trading card game accessories. Card sleeves, top loaders, and binders designed for serious collectors.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg: #0a0a0a;
+  --surface: #141414;
+  --surface-2: #1a1a1a;
+  --border: #222;
+  --accent: #d5ee0e;
+  --accent-dim: rgba(213, 238, 14, 0.15);
+  --accent-glow: rgba(213, 238, 14, 0.3);
+  --text: #f5f5f5;
+  --text-muted: #888;
+  --text-dim: #555;
+  --font-display: 'Space Grotesk', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --space-xs: 8px;
+  --space-sm: 16px;
+  --space-md: 32px;
+  --space-lg: 64px;
+  --space-xl: 96px;
+  --space-2xl: 128px;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--bg);
+}
+
+/* NAV */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  padding: 0 var(--space-md);
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(10, 10, 10, 0.8);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.3s;
+}
+
+.nav.scrolled {
+  border-bottom-color: var(--border);
+}
+
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--text);
+}
+
+.nav-logo svg {
+  height: 28px;
+  width: auto;
+}
+
+.nav-brand {
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.nav-links {
+  display: flex;
+  gap: var(--space-md);
+  list-style: none;
+}
+
+.nav-links a {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 400;
+  transition: color 0.2s;
+  letter-spacing: 0.02em;
+}
+
+.nav-links a:hover {
+  color: var(--text);
+}
+
+.nav-cta {
+  background: var(--accent);
+  color: var(--bg);
+  padding: 8px 20px;
+  border-radius: 100px;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  letter-spacing: 0.03em;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.nav-cta:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 20px var(--accent-glow);
+}
+
+.nav-mobile-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--text);
+  cursor: pointer;
+  padding: 8px;
+}
+
+.nav-mobile-toggle span {
+  display: block;
+  width: 20px;
+  height: 2px;
+  background: var(--text);
+  margin: 4px 0;
+  transition: transform 0.3s, opacity 0.3s;
+}
+
+/* HERO */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: var(--space-2xl) var(--space-md);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.hero-bg::before {
+  content: '';
+  position: absolute;
+  top: -40%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 800px;
+  height: 800px;
+  background: radial-gradient(circle, var(--accent-dim) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: heroPulse 6s ease-in-out infinite;
+}
+
+@keyframes heroPulse {
+  0%, 100% { opacity: 0.4; transform: translateX(-50%) scale(1); }
+  50% { opacity: 0.7; transform: translateX(-50%) scale(1.1); }
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 900px;
+}
+
+.hero-logo {
+  margin-bottom: var(--space-lg);
+  opacity: 0;
+  transform: scale(0.9);
+  animation: heroLogoIn 1s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
+}
+
+.hero-logo svg {
+  width: 120px;
+  height: 120px;
+}
+
+@keyframes heroLogoIn {
+  to { opacity: 1; transform: scale(1); }
+}
+
+.hero-tagline {
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: var(--space-md);
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.5s forwards;
+}
+
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(40px, 7vw, 80px);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
+  margin-bottom: var(--space-md);
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.7s forwards;
+}
+
+.hero h1 .accent {
+  color: var(--accent);
+}
+
+.hero-sub {
+  font-size: clamp(16px, 2vw, 20px);
+  color: var(--text-muted);
+  max-width: 560px;
+  margin: 0 auto var(--space-lg);
+  line-height: 1.7;
+  text-wrap: pretty;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.9s forwards;
+}
+
+.hero-actions {
+  display: flex;
+  gap: var(--space-sm);
+  justify-content: center;
+  flex-wrap: wrap;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 1.1s forwards;
+}
+
+@keyframes fadeUp {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: var(--bg);
+  padding: 14px 32px;
+  border-radius: 100px;
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+  letter-spacing: 0.03em;
+  transition: transform 0.2s, box-shadow 0.3s;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px var(--accent-glow);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--text);
+  padding: 14px 32px;
+  border-radius: 100px;
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 500;
+  text-decoration: none;
+  letter-spacing: 0.03em;
+  border: 1px solid var(--border);
+  transition: border-color 0.2s, background 0.2s;
+  cursor: pointer;
+}
+
+.btn-secondary:hover {
+  border-color: var(--text-dim);
+  background: rgba(255,255,255,0.03);
+}
+
+.hero-scroll {
+  position: absolute;
+  bottom: var(--space-md);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-dim);
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  opacity: 0;
+  animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 1.5s forwards;
+}
+
+.hero-scroll-line {
+  width: 1px;
+  height: 40px;
+  background: linear-gradient(to bottom, var(--text-dim), transparent);
+  animation: scrollLine 2s ease-in-out infinite;
+}
+
+@keyframes scrollLine {
+  0%, 100% { opacity: 0.3; transform: scaleY(0.6); }
+  50% { opacity: 1; transform: scaleY(1); }
+}
+
+/* SECTIONS COMMON */
+section {
+  padding: var(--space-2xl) var(--space-md);
+}
+
+.section-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.section-label {
+  font-family: var(--font-display);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: var(--space-sm);
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(32px, 5vw, 56px);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+  margin-bottom: var(--space-md);
+}
+
+.section-desc {
+  font-size: 18px;
+  color: var(--text-muted);
+  max-width: 600px;
+  line-height: 1.7;
+  text-wrap: pretty;
+}
+
+/* REVEAL ANIMATION */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+
+/* ABOUT */
+.about {
+  border-top: 1px solid var(--border);
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-xl);
+  align-items: center;
+  margin-top: var(--space-lg);
+}
+
+.about-visual {
+  aspect-ratio: 1;
+  background: var(--surface);
+  border-radius: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+
+.about-visual::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 30% 40%, var(--accent-dim), transparent 60%);
+}
+
+.about-visual svg {
+  width: 50%;
+  height: auto;
+  position: relative;
+  z-index: 1;
+  filter: drop-shadow(0 0 40px var(--accent-dim));
+}
+
+.about-text p {
+  color: var(--text-muted);
+  font-size: 17px;
+  line-height: 1.8;
+  margin-bottom: var(--space-md);
+  text-wrap: pretty;
+}
+
+.about-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-md);
+  margin-top: var(--space-lg);
+}
+
+.stat {
+  text-align: center;
+}
+
+.stat-number {
+  font-family: var(--font-display);
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--accent);
+  line-height: 1;
+}
+
+.stat-label {
+  font-size: 13px;
+  color: var(--text-dim);
+  margin-top: 6px;
+  letter-spacing: 0.05em;
+}
+
+/* PRODUCTS */
+.products {
+  border-top: 1px solid var(--border);
+}
+
+.products-header {
+  text-align: center;
+  margin-bottom: var(--space-xl);
+}
+
+.products-header .section-desc {
+  margin: 0 auto;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-md);
+}
+
+.product-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  overflow: hidden;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s, box-shadow 0.3s;
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.product-card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(213, 238, 14, 0.2);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.4), 0 0 40px var(--accent-dim);
+}
+
+.product-image {
+  aspect-ratio: 4/3;
+  background: var(--surface-2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.product-image::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, transparent 60%, var(--surface));
+}
+
+.product-icon {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.product-icon svg {
+  width: 80px;
+  height: 80px;
+  stroke: var(--accent);
+  stroke-width: 1.5;
+  fill: none;
+  opacity: 0.7;
+  transition: opacity 0.3s, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.product-card:hover .product-icon svg {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+.product-info {
+  padding: var(--space-md);
+}
+
+.product-name {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  letter-spacing: -0.01em;
+}
+
+.product-desc {
+  color: var(--text-muted);
+  font-size: 15px;
+  line-height: 1.6;
+  margin-bottom: var(--space-sm);
+  text-wrap: pretty;
+}
+
+.product-link {
+  color: var(--accent);
+  font-size: 14px;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: gap 0.2s;
+}
+
+.product-card:hover .product-link {
+  gap: 10px;
+}
+
+.product-link svg {
+  width: 14px;
+  height: 14px;
+  stroke: currentColor;
+  stroke-width: 2;
+  fill: none;
+}
+
+/* COMING SOON */
+.coming-soon {
+  border-top: 1px solid var(--border);
+}
+
+.coming-soon-header {
+  text-align: center;
+  margin-bottom: var(--space-lg);
+}
+
+.coming-soon-header .section-desc {
+  margin: 0 auto;
+}
+
+.coming-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-md);
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.coming-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: var(--space-md);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.3s;
+}
+
+.coming-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.coming-card:hover::before {
+  opacity: 1;
+}
+
+.coming-card:hover {
+  border-color: rgba(213, 238, 14, 0.15);
+}
+
+.coming-icon {
+  width: 48px;
+  height: 48px;
+  margin: 0 auto var(--space-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--accent-dim);
+  border-radius: 12px;
+}
+
+.coming-icon svg {
+  width: 24px;
+  height: 24px;
+  stroke: var(--accent);
+  stroke-width: 1.5;
+  fill: none;
+}
+
+.coming-name {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.coming-badge {
+  font-size: 11px;
+  color: var(--accent);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+/* WHY */
+.why {
+  border-top: 1px solid var(--border);
+}
+
+.why-header {
+  text-align: center;
+  margin-bottom: var(--space-xl);
+}
+
+.why-header .section-desc {
+  margin: 0 auto;
+}
+
+.why-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-md);
+}
+
+.why-item {
+  padding: var(--space-lg);
+  border-radius: 20px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  transition: border-color 0.3s;
+}
+
+.why-item:hover {
+  border-color: rgba(213, 238, 14, 0.15);
+}
+
+.why-number {
+  font-family: var(--font-display);
+  font-size: 48px;
+  font-weight: 700;
+  color: var(--accent);
+  opacity: 0.3;
+  line-height: 1;
+  margin-bottom: var(--space-sm);
+}
+
+.why-item h3 {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  letter-spacing: -0.01em;
+}
+
+.why-item p {
+  color: var(--text-muted);
+  font-size: 15px;
+  line-height: 1.7;
+  text-wrap: pretty;
+}
+
+/* NEWSLETTER */
+.newsletter {
+  border-top: 1px solid var(--border);
+}
+
+.newsletter-inner {
+  max-width: 700px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.newsletter-form {
+  display: flex;
+  gap: 12px;
+  margin-top: var(--space-lg);
+  max-width: 480px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.newsletter-form input {
+  flex: 1;
+  padding: 14px 20px;
+  border-radius: 100px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 15px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.newsletter-form input::placeholder {
+  color: var(--text-dim);
+}
+
+.newsletter-form input:focus {
+  border-color: var(--accent);
+}
+
+.newsletter-note {
+  font-size: 13px;
+  color: var(--text-dim);
+  margin-top: var(--space-sm);
+}
+
+/* FOOTER */
+.footer {
+  border-top: 1px solid var(--border);
+  padding: var(--space-lg) var(--space-md);
+}
+
+.footer-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.footer-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.footer-brand svg {
+  height: 24px;
+  width: auto;
+}
+
+.footer-brand span {
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.footer-copy {
+  font-size: 13px;
+  color: var(--text-dim);
+}
+
+.footer-links {
+  display: flex;
+  gap: var(--space-md);
+  list-style: none;
+}
+
+.footer-links a {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 13px;
+  transition: color 0.2s;
+}
+
+.footer-links a:hover {
+  color: var(--text);
+}
+
+/* MOBILE */
+@media (max-width: 900px) {
+  .nav-links { display: none; }
+  .nav-cta { display: none; }
+  .nav-mobile-toggle { display: block; }
+
+  .nav-links.open {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 64px;
+    left: 0;
+    right: 0;
+    background: rgba(10,10,10,0.95);
+    backdrop-filter: blur(20px);
+    padding: var(--space-md);
+    gap: var(--space-sm);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .about-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+  }
+
+  .about-visual {
+    max-height: 300px;
+  }
+
+  .product-grid {
+    grid-template-columns: 1fr;
+    max-width: 440px;
+    margin: 0 auto;
+  }
+
+  .coming-grid {
+    grid-template-columns: 1fr;
+    max-width: 320px;
+  }
+
+  .why-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .newsletter-form {
+    flex-direction: column;
+  }
+
+  .footer-inner {
+    flex-direction: column;
+    gap: var(--space-md);
+    text-align: center;
+  }
+
+  .footer-links {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  section {
+    padding: var(--space-xl) var(--space-sm);
+  }
+}
+
+@media (max-width: 600px) {
+  .about-stats {
+    grid-template-columns: 1fr;
+    gap: var(--space-sm);
+  }
+
+  .stat {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    text-align: left;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <a href="#" class="nav-logo">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="591 469 318 318" height="28">
+      <path fill="#d5ee0e" d="M 724.2 469.2 L 775.8 469.2 L 766 589.5 L 844.2 497.5 L 880.6 534 L 788.7 612.1 L 908.9 602.4 L 908.9 653.9 L 788.7 644.2 L 880.6 722.3 L 844.2 758.8 L 766 666.8 L 775.8 787.1 L 724.2 787.1 L 734 666.8 L 655.8 758.8 L 619.4 722.3 L 711.3 644.2 L 591.1 653.9 L 591.1 602.4 L 711.3 612.1 L 619.4 534 L 655.8 497.5 L 734 589.5 Z"/>
+    </svg>
+    <span class="nav-brand">Arcadia Collective</span>
+  </a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#products">Products</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#why">Why&nbsp;Us</a></li>
+    <li><a href="#newsletter">Contact</a></li>
+  </ul>
+  <a href="#products" class="nav-cta">Shop Now</a>
+  <button class="nav-mobile-toggle" id="navToggle" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <div class="hero-logo">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="591 469 318 318" width="120" height="120">
+        <path fill="#d5ee0e" d="M 724.2 469.2 L 775.8 469.2 L 766 589.5 L 844.2 497.5 L 880.6 534 L 788.7 612.1 L 908.9 602.4 L 908.9 653.9 L 788.7 644.2 L 880.6 722.3 L 844.2 758.8 L 766 666.8 L 775.8 787.1 L 724.2 787.1 L 734 666.8 L 655.8 758.8 L 619.4 722.3 L 711.3 644.2 L 591.1 653.9 L 591.1 602.4 L 711.3 612.1 L 619.4 534 L 655.8 497.5 L 734 589.5 Z"/>
+      </svg>
+    </div>
+    <p class="hero-tagline">Benevolent Kings</p>
+    <h1>Protect What<br>You <span class="accent">Collect</span></h1>
+    <p class="hero-sub">Premium trading card accessories crafted for collectors who refuse to compromise. Every sleeve, loader, and binder — designed to&nbsp;last.</p>
+    <div class="hero-actions">
+      <a href="#products" class="btn-primary">Explore Products</a>
+      <a href="#about" class="btn-secondary">Our Story</a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <span>Scroll</span>
+    <div class="hero-scroll-line"></div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="section-inner">
+    <div class="about-grid">
+      <div class="about-text">
+        <p class="section-label reveal">Our Story</p>
+        <h2 class="section-title reveal reveal-delay-1">Built by Collectors,<br>for&nbsp;Collectors</h2>
+        <p class="reveal reveal-delay-2">We started Arcadia Collective because we were tired of settling. Cheap sleeves that split. Binders that bent. Top loaders that scratched. As collectors ourselves, we knew the community deserved better.</p>
+        <p class="reveal reveal-delay-3">Every product in our lineup is tested, refined, and approved by real collectors before it reaches your hands. No compromises. No shortcuts. Just pure, uncompromising protection for the cards you love.</p>
+      </div>
+      <div class="about-visual reveal reveal-delay-2">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="591 469 318 318">
+          <path fill="#d5ee0e" d="M 724.2 469.2 L 775.8 469.2 L 766 589.5 L 844.2 497.5 L 880.6 534 L 788.7 612.1 L 908.9 602.4 L 908.9 653.9 L 788.7 644.2 L 880.6 722.3 L 844.2 758.8 L 766 666.8 L 775.8 787.1 L 724.2 787.1 L 734 666.8 L 655.8 758.8 L 619.4 722.3 L 711.3 644.2 L 591.1 653.9 L 591.1 602.4 L 711.3 612.1 L 619.4 534 L 655.8 497.5 L 734 589.5 Z"/>
+        </svg>
+      </div>
+    </div>
+    <div class="about-stats reveal reveal-delay-3">
+      <div class="stat">
+        <div class="stat-number">10K+</div>
+        <div class="stat-label">Cards Protected</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number">100%</div>
+        <div class="stat-label">Acid-Free Materials</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number">3x</div>
+        <div class="stat-label">Thicker Than Standard</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section class="products" id="products">
+  <div class="section-inner">
+    <div class="products-header">
+      <p class="section-label reveal">Products</p>
+      <h2 class="section-title reveal reveal-delay-1">Premium Protection,<br>Zero&nbsp;Compromise</h2>
+      <p class="section-desc reveal reveal-delay-2">Three essentials every serious collector needs. Engineered with precision, built to&nbsp;endure.</p>
+    </div>
+
+    <div class="product-grid">
+      <!-- Card Sleeves -->
+      <a class="product-card reveal reveal-delay-1" href="#">
+        <div class="product-image">
+          <div class="product-icon">
+            <svg viewBox="0 0 80 80">
+              <rect x="15" y="8" width="50" height="64" rx="4" />
+              <rect x="22" y="16" width="36" height="48" rx="2" />
+              <line x1="22" y1="40" x2="58" y2="40" />
+            </svg>
+          </div>
+        </div>
+        <div class="product-info">
+          <h3 class="product-name">Card Sleeves</h3>
+          <p class="product-desc">Crystal-clear, ultra-durable penny sleeves and premium inners. Acid-free polypropylene that keeps your cards pristine for decades.</p>
+          <span class="product-link">Shop Sleeves <svg viewBox="0 0 14 14"><path d="M1 7h12M8 2l5 5-5 5"/></svg></span>
+        </div>
+      </a>
+
+      <!-- Top Loaders -->
+      <a class="product-card reveal reveal-delay-2" href="#">
+        <div class="product-image">
+          <div class="product-icon">
+            <svg viewBox="0 0 80 80">
+              <rect x="12" y="6" width="56" height="68" rx="3" />
+              <rect x="20" y="14" width="40" height="52" rx="2" />
+              <path d="M20 14h40v8H20z" />
+            </svg>
+          </div>
+        </div>
+        <div class="product-info">
+          <h3 class="product-name">Top Loaders</h3>
+          <p class="product-desc">Rigid 35pt and 55pt holders with crystal clarity. UV-resistant material that shields your most valuable pulls from light&nbsp;damage.</p>
+          <span class="product-link">Shop Loaders <svg viewBox="0 0 14 14"><path d="M1 7h12M8 2l5 5-5 5"/></svg></span>
+        </div>
+      </a>
+
+      <!-- Binders -->
+      <a class="product-card reveal reveal-delay-3" href="#">
+        <div class="product-image">
+          <div class="product-icon">
+            <svg viewBox="0 0 80 80">
+              <rect x="10" y="10" width="50" height="60" rx="3" />
+              <rect x="20" y="10" width="50" height="60" rx="3" />
+              <line x1="16" y1="28" x2="16" y2="28" stroke-linecap="round" stroke-width="3"/>
+              <line x1="16" y1="40" x2="16" y2="40" stroke-linecap="round" stroke-width="3"/>
+              <line x1="16" y1="52" x2="16" y2="52" stroke-linecap="round" stroke-width="3"/>
+              <rect x="28" y="20" width="16" height="20" rx="1" />
+              <rect x="48" y="20" width="16" height="20" rx="1" />
+              <rect x="28" y="44" width="16" height="20" rx="1" />
+              <rect x="48" y="44" width="16" height="20" rx="1" />
+            </svg>
+          </div>
+        </div>
+        <div class="product-info">
+          <h3 class="product-name">Binders</h3>
+          <p class="product-desc">Side-loading 9-pocket and 4-pocket pages in premium leatherette binders. Display your collection with the respect it&nbsp;deserves.</p>
+          <span class="product-link">Shop Binders <svg viewBox="0 0 14 14"><path d="M1 7h12M8 2l5 5-5 5"/></svg></span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- COMING SOON -->
+<section class="coming-soon" id="coming-soon">
+  <div class="section-inner">
+    <div class="coming-soon-header">
+      <p class="section-label reveal">Coming Soon</p>
+      <h2 class="section-title reveal reveal-delay-1">The Lineup<br>Is&nbsp;Growing</h2>
+      <p class="section-desc reveal reveal-delay-2">We're expanding our range to cover every aspect of card storage and display. Stay&nbsp;tuned.</p>
+    </div>
+    <div class="coming-grid">
+      <div class="coming-card reveal reveal-delay-1">
+        <div class="coming-icon">
+          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
+        </div>
+        <h3 class="coming-name">Storage Cases</h3>
+        <span class="coming-badge">2025</span>
+      </div>
+      <div class="coming-card reveal reveal-delay-2">
+        <div class="coming-icon">
+          <svg viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M12 6V4a2 2 0 0 1 2-2h0a2 2 0 0 1 2 2v2"/><circle cx="12" cy="12" r="2"/></svg>
+        </div>
+        <h3 class="coming-name">Magnetic Slabs</h3>
+        <span class="coming-badge">2025</span>
+      </div>
+      <div class="coming-card reveal reveal-delay-3">
+        <div class="coming-icon">
+          <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+        </div>
+        <h3 class="coming-name">Storage Boxes</h3>
+        <span class="coming-badge">2025</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY -->
+<section class="why" id="why">
+  <div class="section-inner">
+    <div class="why-header">
+      <p class="section-label reveal">Why Arcadia</p>
+      <h2 class="section-title reveal reveal-delay-1">Different by Design,<br>Not by&nbsp;Accident</h2>
+      <p class="section-desc reveal reveal-delay-2">We obsess over the details so you don't have&nbsp;to.</p>
+    </div>
+    <div class="why-grid">
+      <div class="why-item reveal reveal-delay-1">
+        <div class="why-number">01</div>
+        <h3>Collector-Grade Materials</h3>
+        <p>Every product uses acid-free, archival-quality materials. Your cards stay in mint condition whether stored for months or decades.</p>
+      </div>
+      <div class="why-item reveal reveal-delay-2">
+        <div class="why-number">02</div>
+        <h3>Precision Engineering</h3>
+        <p>Tight tolerances, perfect fits. Our top loaders don't rattle, our sleeves don't split, and our binder pages load smoothly every single time.</p>
+      </div>
+      <div class="why-item reveal reveal-delay-3">
+        <div class="why-number">03</div>
+        <h3>UV Protection Built In</h3>
+        <p>Light is your collection's silent enemy. Our products incorporate UV-resistant materials to prevent fading and discolouration over time.</p>
+      </div>
+      <div class="why-item reveal reveal-delay-4">
+        <div class="why-number">04</div>
+        <h3>Community First</h3>
+        <p>Built by collectors, tested by collectors, approved by collectors. We listen, iterate, and ship products the community actually wants.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<section class="newsletter" id="newsletter">
+  <div class="section-inner">
+    <div class="newsletter-inner">
+      <p class="section-label reveal">Stay in the Loop</p>
+      <h2 class="section-title reveal reveal-delay-1">Get Early Access<br>&amp;&nbsp;Drops</h2>
+      <p class="section-desc reveal reveal-delay-2" style="margin: 0 auto;">Be the first to know about new products, restocks, and exclusive collector drops. No&nbsp;spam, ever.</p>
+      <form class="newsletter-form reveal reveal-delay-3" onsubmit="handleSubmit(event)">
+        <input type="email" placeholder="Enter your email" required aria-label="Email address">
+        <button type="submit" class="btn-primary">Subscribe</button>
+      </form>
+      <p class="newsletter-note reveal reveal-delay-4">Join 500+ collectors already on the list</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="591 469 318 318" height="24">
+        <path fill="#d5ee0e" d="M 724.2 469.2 L 775.8 469.2 L 766 589.5 L 844.2 497.5 L 880.6 534 L 788.7 612.1 L 908.9 602.4 L 908.9 653.9 L 788.7 644.2 L 880.6 722.3 L 844.2 758.8 L 766 666.8 L 775.8 787.1 L 724.2 787.1 L 734 666.8 L 655.8 758.8 L 619.4 722.3 L 711.3 644.2 L 591.1 653.9 L 591.1 602.4 L 711.3 612.1 L 619.4 534 L 655.8 497.5 L 734 589.5 Z"/>
+      </svg>
+      <span>Arcadia Collective</span>
+    </div>
+    <p class="footer-copy">&copy; 2025 Arcadia Collective. All rights reserved.</p>
+    <ul class="footer-links">
+      <li><a href="#">Instagram</a></li>
+      <li><a href="#">Twitter</a></li>
+      <li><a href="#">TikTok</a></li>
+      <li><a href="#">Privacy</a></li>
+    </ul>
+  </div>
+</footer>
+
+<script>
+// Scroll reveal
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+
+reveals.forEach(el => observer.observe(el));
+
+// Nav scroll state
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 50);
+}, { passive: true });
+
+// Mobile nav
+const navToggle = document.getElementById('navToggle');
+const navLinks = document.getElementById('navLinks');
+navToggle.addEventListener('click', () => {
+  navLinks.classList.toggle('open');
+});
+
+navLinks.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', () => navLinks.classList.remove('open'));
+});
+
+// Newsletter
+function handleSubmit(e) {
+  e.preventDefault();
+  const input = e.target.querySelector('input');
+  const btn = e.target.querySelector('button');
+  btn.textContent = 'Subscribed!';
+  btn.style.background = '#232323';
+  btn.style.color = '#d5ee0e';
+  input.value = '';
+  setTimeout(() => {
+    btn.textContent = 'Subscribe';
+    btn.style.background = '';
+    btn.style.color = '';
+  }, 3000);
+}
+
+// Smooth scroll for anchor links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function(e) {
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      e.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
+</script>
+
+</body>
+</html>
