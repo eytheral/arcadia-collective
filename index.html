@@ -167,29 +167,59 @@ body {
   position: absolute;
   inset: 0;
   z-index: 0;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-  grid-auto-rows: 180px;
+  display: flex;
+  flex-direction: column;
   gap: 3px;
-  padding: 3px;
-  opacity: 0.4;
+  padding: 3px 0;
+  opacity: 0.45;
   overflow: hidden;
   max-height: 100vh;
+  justify-content: center;
 }
 
-.hero-cards img {
-  width: 100%;
+.hero-cards .card-row {
+  display: flex;
+  gap: 3px;
+  width: max-content;
+  flex: 1;
+  min-height: 0;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+.hero-cards .card-row.scroll-left {
+  animation-name: scrollLeft;
+}
+
+.hero-cards .card-row.scroll-right {
+  animation-name: scrollRight;
+}
+
+@keyframes scrollLeft {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes scrollRight {
+  0% { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
+}
+
+.hero-cards .card-row img {
+  width: auto;
   height: 100%;
+  aspect-ratio: 2.5/3.5;
   object-fit: cover;
   border-radius: 4px;
+  flex-shrink: 0;
   opacity: 0;
-  transform: scale(0) rotate(calc(var(--r, 0) * 1deg));
+  transform: scale(0);
   transition: opacity 0.35s ease-out, transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.hero-cards img.visible {
+.hero-cards .card-row img.visible {
   opacity: 1;
-  transform: scale(1) rotate(0deg);
+  transform: scale(1);
 }
 
 /* Dark overlay for text readability */
@@ -524,9 +554,10 @@ section {
 }
 
 .product-card:hover {
-  transform: translateY(-8px);
-  border-color: rgba(213, 238, 14, 0.2);
-  box-shadow: 0 20px 60px rgba(0,0,0,0.4), 0 0 40px var(--accent-dim);
+  transform: translateY(-12px) scale(1.03);
+  border-color: rgba(213, 238, 14, 0.25);
+  box-shadow: 0 30px 80px rgba(0,0,0,0.5), 0 0 50px var(--accent-dim);
+  z-index: 2;
 }
 
 .product-image {
@@ -540,11 +571,11 @@ section {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .product-card:hover .product-image img {
-  transform: scale(1.05);
+  transform: scale(1.12);
 }
 
 .product-image::after {
@@ -947,8 +978,8 @@ section {
   </a>
   <ul class="nav-links" id="navLinks">
     <li><a href="#products">Products</a></li>
-    <li><a href="#about">About</a></li>
     <li><a href="#why">Why&nbsp;Us</a></li>
+    <li><a href="#about">About</a></li>
     <li><a href="#newsletter">Contact</a></li>
   </ul>
   <a href="#products" class="nav-cta">Shop Now</a>
@@ -978,46 +1009,6 @@ section {
   <div class="hero-scroll">
     <span>Scroll</span>
     <div class="hero-scroll-line"></div>
-  </div>
-</section>
-
-<!-- ABOUT -->
-<section class="about" id="about">
-  <div class="section-inner">
-    <div class="about-grid">
-      <div class="about-text">
-        <p class="section-label reveal">Our Story</p>
-        <h2 class="section-title reveal reveal-delay-1">Built by Collectors,<br>for&nbsp;Collectors</h2>
-        <p class="reveal reveal-delay-2">We started Arcadia Collective because we were tired of settling. Cheap sleeves that split. Binders that bent. Top loaders that scratched. As collectors ourselves, we knew the community deserved better.</p>
-        <p class="reveal reveal-delay-3">Every product in our lineup is tested, refined, and approved by real collectors before it reaches your hands. No compromises. No shortcuts. Just pure, uncompromising protection for the cards you love.</p>
-      </div>
-      <div class="founders reveal reveal-delay-2">
-        <div class="founder">
-          <img src="Rick.jpeg" alt="Rick — Co-Founder" loading="lazy">
-          <div class="founder-name">Rick</div>
-          <div class="founder-role">Co-Founder</div>
-        </div>
-        <div class="founder">
-          <img src="tim.jpeg" alt="Tim — Co-Founder" loading="lazy">
-          <div class="founder-name">Tim</div>
-          <div class="founder-role">Co-Founder</div>
-        </div>
-      </div>
-    </div>
-    <div class="about-stats reveal reveal-delay-3">
-      <div class="stat">
-        <div class="stat-number">10K+</div>
-        <div class="stat-label">Cards Protected</div>
-      </div>
-      <div class="stat">
-        <div class="stat-number">100%</div>
-        <div class="stat-label">Acid-Free Materials</div>
-      </div>
-      <div class="stat">
-        <div class="stat-number">3x</div>
-        <div class="stat-label">Thicker Than Standard</div>
-      </div>
-    </div>
   </div>
 </section>
 
@@ -1143,6 +1134,46 @@ section {
   </div>
 </section>
 
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="section-inner">
+    <div class="about-grid">
+      <div class="about-text">
+        <p class="section-label reveal">Our Story</p>
+        <h2 class="section-title reveal reveal-delay-1">Built by Collectors,<br>for&nbsp;Collectors</h2>
+        <p class="reveal reveal-delay-2">We started Arcadia Collective because we were tired of settling. Cheap sleeves that split. Binders that bent. Top loaders that scratched. As collectors ourselves, we knew the community deserved better.</p>
+        <p class="reveal reveal-delay-3">Every product in our lineup is tested, refined, and approved by real collectors before it reaches your hands. No compromises. No shortcuts. Just pure, uncompromising protection for the cards you love.</p>
+      </div>
+      <div class="founders reveal reveal-delay-2">
+        <div class="founder">
+          <img src="Rick.jpeg" alt="Rick — Co-Founder" loading="lazy">
+          <div class="founder-name">Rick</div>
+          <div class="founder-role">Co-Founder</div>
+        </div>
+        <div class="founder">
+          <img src="tim.jpeg" alt="Tim — Co-Founder" loading="lazy">
+          <div class="founder-name">Tim</div>
+          <div class="founder-role">Co-Founder</div>
+        </div>
+      </div>
+    </div>
+    <div class="about-stats reveal reveal-delay-3">
+      <div class="stat">
+        <div class="stat-number">10K+</div>
+        <div class="stat-label">Cards Protected</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number">100%</div>
+        <div class="stat-label">Acid-Free Materials</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number">3x</div>
+        <div class="stat-label">Thicker Than Standard</div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- NEWSLETTER -->
 <section class="newsletter" id="newsletter">
   <div class="section-inner">
@@ -1179,25 +1210,37 @@ section {
 </footer>
 
 <script>
-// Card cascade hero
+// Card cascade hero with alternating scroll rows
 (function() {
   const grid = document.getElementById('heroCards');
-  const totalCards = 80;
-  const stagger = 35;
-  const cards = [];
+  const rows = 5;
+  const cardsPerRow = 16;
+  const stagger = 30;
+  let cardIndex = 0;
+  const allImages = [];
 
-  for (let i = 0; i < totalCards; i++) {
-    const img = document.createElement('img');
-    const cardNum = ((i % 80) + 1).toString().padStart(3, '0');
-    img.src = 'cards/card-' + cardNum + '.png';
-    img.alt = '';
-    img.loading = 'eager';
-    img.style.setProperty('--r', (Math.random() * 20 - 10).toString());
-    cards.push(img);
-    grid.appendChild(img);
+  for (let r = 0; r < rows; r++) {
+    const row = document.createElement('div');
+    row.className = 'card-row ' + (r % 2 === 0 ? 'scroll-left' : 'scroll-right');
+    const duration = 40 + Math.random() * 20;
+    row.style.animationDuration = duration + 's';
+
+    for (let pass = 0; pass < 2; pass++) {
+      for (let c = 0; c < cardsPerRow; c++) {
+        const img = document.createElement('img');
+        const num = ((cardIndex + c) % 80) + 1;
+        img.src = 'cards/card-' + String(num).padStart(3, '0') + '.png';
+        img.alt = '';
+        img.loading = 'eager';
+        row.appendChild(img);
+        allImages.push(img);
+      }
+    }
+    cardIndex += cardsPerRow;
+    grid.appendChild(row);
   }
 
-  const shuffled = cards.sort(() => Math.random() - 0.5);
+  const shuffled = allImages.sort(() => Math.random() - 0.5);
   shuffled.forEach((img, i) => {
     setTimeout(() => img.classList.add('visible'), i * stagger);
   });
