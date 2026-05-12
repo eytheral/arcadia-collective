@@ -1182,13 +1182,13 @@ section {
 // Card cascade hero
 (function() {
   const grid = document.getElementById('heroCards');
-  const totalCards = 60;
+  const totalCards = 80;
   const stagger = 35;
   const cards = [];
 
   for (let i = 0; i < totalCards; i++) {
     const img = document.createElement('img');
-    const cardNum = ((i % 189) + 1).toString().padStart(3, '0');
+    const cardNum = ((i % 80) + 1).toString().padStart(3, '0');
     img.src = 'cards/card-' + cardNum + '.png';
     img.alt = '';
     img.loading = 'eager';
