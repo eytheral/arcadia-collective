@@ -487,6 +487,59 @@ section {
   margin-top: 4px;
 }
 
+.founder {
+  position: relative;
+  cursor: pointer;
+}
+
+.founder-bio {
+  position: absolute;
+  bottom: calc(100% + 12px);
+  left: 50%;
+  transform: translateX(-50%) translateY(8px);
+  width: 300px;
+  background: rgba(20, 20, 20, 0.95);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(213, 238, 14, 0.2);
+  border-radius: 16px;
+  padding: 20px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 10;
+}
+
+.founder-bio::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 8px solid transparent;
+  border-top-color: rgba(213, 238, 14, 0.2);
+}
+
+.founder:hover .founder-bio {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+  pointer-events: auto;
+}
+
+.founder-bio h4 {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--accent);
+  margin-bottom: 8px;
+}
+
+.founder-bio p {
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--text-muted);
+  margin: 0;
+}
+
 .about-text p {
   color: var(--text-muted);
   font-size: 17px;
@@ -916,6 +969,11 @@ section {
     flex-direction: row;
   }
 
+  .founder-bio {
+    width: 240px;
+    padding: 16px;
+  }
+
   .product-grid {
     grid-template-columns: 1fr;
     max-width: 440px;
@@ -998,7 +1056,7 @@ section {
         <path fill="#d5ee0e" d="M 724.2 469.2 L 775.8 469.2 L 766 589.5 L 844.2 497.5 L 880.6 534 L 788.7 612.1 L 908.9 602.4 L 908.9 653.9 L 788.7 644.2 L 880.6 722.3 L 844.2 758.8 L 766 666.8 L 775.8 787.1 L 724.2 787.1 L 734 666.8 L 655.8 758.8 L 619.4 722.3 L 711.3 644.2 L 591.1 653.9 L 591.1 602.4 L 711.3 612.1 L 619.4 534 L 655.8 497.5 L 734 589.5 Z"/>
       </svg>
     </div>
-    <p class="hero-tagline">Benevolent Kings</p>
+    <p class="hero-tagline">Arcadia Collective</p>
     <h1>Protect What<br>You <span class="accent">Collect</span></h1>
     <p class="hero-sub">Premium trading card accessories crafted for collectors who refuse to compromise. Every sleeve, loader, and binder — designed to&nbsp;last.</p>
     <div class="hero-actions">
@@ -1146,11 +1204,19 @@ section {
       </div>
       <div class="founders reveal reveal-delay-2">
         <div class="founder">
+          <div class="founder-bio">
+            <h4>Rick — Co-Founder</h4>
+            <p>A lifelong anime figurine collector with an eye for craftsmanship and detail. Rick brings 20 years of experience in the live events industry — from orchestrating K-pop concerts to managing logistics for The International (Dota&nbsp;2). His obsession with quality collectibles and large-scale operations is what drives Arcadia's product standards.</p>
+          </div>
           <img src="Rick.jpeg" alt="Rick — Co-Founder" loading="lazy">
           <div class="founder-name">Rick</div>
           <div class="founder-role">Co-Founder</div>
         </div>
         <div class="founder">
+          <div class="founder-bio">
+            <h4>Timothy — Co-Founder</h4>
+            <p>A self-confessed arcade junkie and Japan enthusiast with deep roots in Japanese culture. Timothy carries 20 years of logistics expertise and 3 years running vending machine operations — including a 2-year stint in Japan helping a local vending company expand across the country. His hands-on supply chain knowledge ensures every Arcadia product arrives exactly as&nbsp;promised.</p>
+          </div>
           <img src="tim.jpeg" alt="Tim — Co-Founder" loading="lazy">
           <div class="founder-name">Tim</div>
           <div class="founder-role">Co-Founder</div>
