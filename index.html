@@ -492,52 +492,126 @@ section {
   cursor: pointer;
 }
 
-.founder-bio {
-  position: absolute;
-  bottom: calc(100% + 12px);
-  left: 50%;
-  transform: translateX(-50%) translateY(8px);
-  width: 300px;
-  background: rgba(20, 20, 20, 0.95);
-  backdrop-filter: blur(16px);
-  border: 1px solid rgba(213, 238, 14, 0.2);
-  border-radius: 16px;
-  padding: 20px;
+.founder-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(12px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.3s, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-  z-index: 10;
+  transition: opacity 0.35s ease;
 }
 
-.founder-bio::after {
-  content: '';
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-  border: 8px solid transparent;
-  border-top-color: rgba(213, 238, 14, 0.2);
-}
-
-.founder:hover .founder-bio {
+.founder-modal-overlay.active {
   opacity: 1;
-  transform: translateX(-50%) translateY(0);
   pointer-events: auto;
 }
 
-.founder-bio h4 {
-  font-family: var(--font-display);
-  font-size: 16px;
-  font-weight: 600;
-  color: var(--accent);
-  margin-bottom: 8px;
+.founder-modal {
+  width: 75%;
+  max-width: 900px;
+  max-height: 85vh;
+  background: var(--surface);
+  border: 1px solid rgba(213, 238, 14, 0.15);
+  border-radius: 24px;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  transform: scale(0.92) translateY(20px);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.founder-bio p {
-  font-size: 13px;
-  line-height: 1.7;
+.founder-modal-overlay.active .founder-modal {
+  transform: scale(1) translateY(0);
+}
+
+.founder-modal-image {
+  position: relative;
+  overflow: hidden;
+}
+
+.founder-modal-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.founder-modal-content {
+  padding: 48px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.founder-modal-content h3 {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.founder-modal-content .modal-role {
+  font-size: 14px;
+  color: var(--accent);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 500;
+  margin-bottom: 24px;
+}
+
+.founder-modal-content p {
+  font-size: 16px;
+  line-height: 1.8;
   color: var(--text-muted);
-  margin: 0;
+}
+
+.founder-modal-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 40px;
+  height: 40px;
+  border: none;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(8px);
+  color: #fff;
+  font-size: 20px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+  z-index: 1001;
+}
+
+.founder-modal-close:hover {
+  background: rgba(213, 238, 14, 0.3);
+}
+
+@media (max-width: 768px) {
+  .founder-modal {
+    width: 90%;
+    grid-template-columns: 1fr;
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+  .founder-modal-image {
+    max-height: 300px;
+  }
+  .founder-modal-content {
+    padding: 28px 24px;
+  }
+  .founder-modal-content h3 {
+    font-size: 22px;
+  }
+  .founder-modal-content p {
+    font-size: 14px;
+  }
 }
 
 .about-text p {
@@ -969,11 +1043,6 @@ section {
     flex-direction: row;
   }
 
-  .founder-bio {
-    width: 240px;
-    padding: 16px;
-  }
-
   .product-grid {
     grid-template-columns: 1fr;
     max-width: 440px;
@@ -1203,23 +1272,29 @@ section {
         <p class="reveal reveal-delay-3">Every product in our lineup is tested, refined, and approved by real collectors before it reaches your hands. No compromises. No shortcuts. Just pure, uncompromising protection for the cards you love.</p>
       </div>
       <div class="founders reveal reveal-delay-2">
-        <div class="founder">
-          <div class="founder-bio">
-            <h4>Rick — Co-Founder</h4>
-            <p>A lifelong anime figurine collector with an eye for craftsmanship and detail. Rick brings 20 years of experience in the live events industry — from orchestrating K-pop concerts to managing logistics for The International (Dota&nbsp;2). His obsession with quality collectibles and large-scale operations is what drives Arcadia's product standards.</p>
-          </div>
+        <div class="founder" data-founder="rick">
           <img src="Rick.jpeg" alt="Rick — Co-Founder" loading="lazy">
           <div class="founder-name">Rick</div>
           <div class="founder-role">Co-Founder</div>
         </div>
-        <div class="founder">
-          <div class="founder-bio">
-            <h4>Timothy — Co-Founder</h4>
-            <p>A self-confessed arcade junkie and Japan enthusiast with deep roots in Japanese culture. Timothy carries 20 years of logistics expertise and 3 years running vending machine operations — including a 2-year stint in Japan helping a local vending company expand across the country. His hands-on supply chain knowledge ensures every Arcadia product arrives exactly as&nbsp;promised.</p>
-          </div>
+        <div class="founder" data-founder="tim">
           <img src="tim.jpeg" alt="Tim — Co-Founder" loading="lazy">
           <div class="founder-name">Tim</div>
           <div class="founder-role">Co-Founder</div>
+        </div>
+      </div>
+
+      <div class="founder-modal-overlay" id="founderModal">
+        <button class="founder-modal-close" id="founderModalClose">&times;</button>
+        <div class="founder-modal">
+          <div class="founder-modal-image">
+            <img id="modalPhoto" src="" alt="">
+          </div>
+          <div class="founder-modal-content">
+            <h3 id="modalName"></h3>
+            <div class="modal-role">Co-Founder</div>
+            <p id="modalBio"></p>
+          </div>
         </div>
       </div>
     </div>
@@ -1340,6 +1415,52 @@ navToggle.addEventListener('click', () => {
 navLinks.querySelectorAll('a').forEach(link => {
   link.addEventListener('click', () => navLinks.classList.remove('open'));
 });
+
+// Founder modal
+(function() {
+  const bios = {
+    rick: {
+      name: 'Rick',
+      photo: 'Rick.jpeg',
+      bio: 'A lifelong anime figurine collector with an eye for craftsmanship and detail. Rick brings 20 years of experience in the live events industry — from orchestrating K-pop concerts to managing logistics for The International (Dota 2). His obsession with quality collectibles and large-scale operations is what drives Arcadia’s product standards.'
+    },
+    tim: {
+      name: 'Timothy',
+      photo: 'tim.jpeg',
+      bio: 'A self-confessed arcade junkie and Japan enthusiast with deep roots in Japanese culture. Timothy carries 20 years of logistics expertise and 3 years running vending machine operations — including a 2-year stint in Japan helping a local vending company expand across the country. His hands-on supply chain knowledge ensures every Arcadia product arrives exactly as promised.'
+    }
+  };
+  const overlay = document.getElementById('founderModal');
+  const closeBtn = document.getElementById('founderModalClose');
+  const modalPhoto = document.getElementById('modalPhoto');
+  const modalName = document.getElementById('modalName');
+  const modalBio = document.getElementById('modalBio');
+
+  document.querySelectorAll('.founder[data-founder]').forEach(el => {
+    el.addEventListener('click', () => {
+      const data = bios[el.dataset.founder];
+      if (!data) return;
+      modalPhoto.src = data.photo;
+      modalPhoto.alt = data.name;
+      modalName.textContent = data.name;
+      modalBio.textContent = data.bio;
+      overlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    });
+  });
+
+  function closeModal() {
+    overlay.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+  closeBtn.addEventListener('click', closeModal);
+  overlay.addEventListener('click', (e) => {
+    if (e.target === overlay) closeModal();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeModal();
+  });
+})();
 
 // Newsletter
 function handleSubmit(e) {
