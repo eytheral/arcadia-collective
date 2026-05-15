@@ -1,0 +1,5 @@
+.git
+node_modules
+crop-images.js
+fetch-cards.js
+*.jsonl
